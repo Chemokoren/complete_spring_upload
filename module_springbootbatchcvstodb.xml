@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_springbootbatchcvstodb" default="compile.module.springbootbatchcvstodb">
+  <dirname property="module.springbootbatchcvstodb.basedir" file="${ant.file.module_springbootbatchcvstodb}"/>
+  
+  <property name="module.jdk.home.springbootbatchcvstodb" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.springbootbatchcvstodb" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.springbootbatchcvstodb" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.springbootbatchcvstodb" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="springbootbatchcvstodb.output.dir" value="${module.springbootbatchcvstodb.basedir}/target/classes"/>
+  <property name="springbootbatchcvstodb.testoutput.dir" value="${module.springbootbatchcvstodb.basedir}/target/test-classes"/>
+  
+  <path id="springbootbatchcvstodb.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="springbootbatchcvstodb.module.production.classpath">
+    <path refid="${module.jdk.classpath.springbootbatchcvstodb}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-batch:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.6.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-core:3.0.8.release.classpath"/>
+    <path refid="library.maven:_com.ibm.jbatch:com.ibm.jbatch-tck-spi:1.0.classpath"/>
+    <path refid="library.maven:_javax.batch:javax.batch-api:1.0.classpath"/>
+    <path refid="library.maven:_org.codehaus.jettison:jettison:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-infrastructure:3.0.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.retry:spring-retry:1.2.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-jdbc:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-jdbc:8.5.16.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-juli:8.5.16.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.10.release.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.xstream:xstream:1.4.9.classpath"/>
+    <path refid="library.maven:_xmlpull:xmlpull:1.1.3.1.classpath"/>
+    <path refid="library.maven:_xpp3:xpp3_min:1.1.4c.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.10.release.classpath"/>
+  </path>
+  
+  <path id="springbootbatchcvstodb.runtime.production.module.classpath">
+    <pathelement location="${springbootbatchcvstodb.output.dir}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-batch:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.6.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.17.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-core:3.0.8.release.classpath"/>
+    <path refid="library.maven:_com.ibm.jbatch:com.ibm.jbatch-tck-spi:1.0.classpath"/>
+    <path refid="library.maven:_javax.batch:javax.batch-api:1.0.classpath"/>
+    <path refid="library.maven:_org.codehaus.jettison:jettison:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-infrastructure:3.0.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.retry:spring-retry:1.2.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-jdbc:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-jdbc:8.5.16.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-juli:8.5.16.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.10.release.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.43.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.xstream:xstream:1.4.9.classpath"/>
+    <path refid="library.maven:_xmlpull:xmlpull:1.1.3.1.classpath"/>
+    <path refid="library.maven:_xpp3:xpp3_min:1.1.4c.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.10.release.classpath"/>
+  </path>
+  
+  <path id="springbootbatchcvstodb.module.classpath">
+    <path refid="${module.jdk.classpath.springbootbatchcvstodb}"/>
+    <pathelement location="${springbootbatchcvstodb.output.dir}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-batch:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.6.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.17.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-core:3.0.8.release.classpath"/>
+    <path refid="library.maven:_com.ibm.jbatch:com.ibm.jbatch-tck-spi:1.0.classpath"/>
+    <path refid="library.maven:_javax.batch:javax.batch-api:1.0.classpath"/>
+    <path refid="library.maven:_org.codehaus.jettison:jettison:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-infrastructure:3.0.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.retry:spring-retry:1.2.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-jdbc:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-jdbc:8.5.16.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-juli:8.5.16.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.10.release.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.43.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.xstream:xstream:1.4.9.classpath"/>
+    <path refid="library.maven:_xmlpull:xmlpull:1.1.3.1.classpath"/>
+    <path refid="library.maven:_xpp3:xpp3_min:1.1.4c.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-test:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test-autoconfigure:1.5.6.release.classpath"/>
+    <path refid="library.maven:_com.jayway.jsonpath:json-path:2.2.0.classpath"/>
+    <path refid="library.maven:_net.minidev:json-smart:2.2.1.classpath"/>
+    <path refid="library.maven:_net.minidev:accessors-smart:1.1.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.assertj:assertj-core:2.6.0.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-core:1.10.19.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.1.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_org.skyscreamer:jsonassert:1.4.0.classpath"/>
+    <path refid="library.maven:_com.vaadin.external.google:android-json:0.0.20131108.vaadin1.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-test:4.3.10.release.classpath"/>
+  </path>
+  
+  <path id="springbootbatchcvstodb.runtime.module.classpath">
+    <pathelement location="${springbootbatchcvstodb.testoutput.dir}"/>
+    <pathelement location="${springbootbatchcvstodb.output.dir}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-batch:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-autoconfigure:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-logging:1.5.6.release.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-classic:1.1.11.classpath"/>
+    <path refid="library.maven:_ch.qos.logback:logback-core:1.1.11.classpath"/>
+    <path refid="library.maven:_org.slf4j:jcl-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:jul-to-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.slf4j:log4j-over-slf4j:1.7.25.classpath"/>
+    <path refid="library.maven:_org.yaml:snakeyaml:1.17.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-core:3.0.8.release.classpath"/>
+    <path refid="library.maven:_com.ibm.jbatch:com.ibm.jbatch-tck-spi:1.0.classpath"/>
+    <path refid="library.maven:_javax.batch:javax.batch-api:1.0.classpath"/>
+    <path refid="library.maven:_org.codehaus.jettison:jettison:1.2.classpath"/>
+    <path refid="library.maven:_org.springframework.batch:spring-batch-infrastructure:3.0.8.release.classpath"/>
+    <path refid="library.maven:_org.springframework.retry:spring-retry:1.2.1.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-aop:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-beans:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-context:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-expression:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-tx:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-jdbc:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-jdbc:8.5.16.classpath"/>
+    <path refid="library.maven:_org.apache.tomcat:tomcat-juli:8.5.16.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-jdbc:4.3.10.release.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.43.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.xstream:xstream:1.4.9.classpath"/>
+    <path refid="library.maven:_xmlpull:xmlpull:1.1.3.1.classpath"/>
+    <path refid="library.maven:_xpp3:xpp3_min:1.1.4c.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-test:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test:1.5.6.release.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-test-autoconfigure:1.5.6.release.classpath"/>
+    <path refid="library.maven:_com.jayway.jsonpath:json-path:2.2.0.classpath"/>
+    <path refid="library.maven:_net.minidev:json-smart:2.2.1.classpath"/>
+    <path refid="library.maven:_net.minidev:accessors-smart:1.1.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.assertj:assertj-core:2.6.0.classpath"/>
+    <path refid="library.maven:_org.mockito:mockito-core:1.10.19.classpath"/>
+    <path refid="library.maven:_org.objenesis:objenesis:2.1.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-library:1.3.classpath"/>
+    <path refid="library.maven:_org.skyscreamer:jsonassert:1.4.0.classpath"/>
+    <path refid="library.maven:_com.vaadin.external.google:android-json:0.0.20131108.vaadin1.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-core:4.3.10.release.classpath"/>
+    <path refid="library.maven:_org.springframework:spring-test:4.3.10.release.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.springbootbatchcvstodb">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.springbootbatchcvstodb">
+    <patternset refid="excluded.from.module.springbootbatchcvstodb"/>
+  </patternset>
+  
+  <path id="springbootbatchcvstodb.module.sourcepath">
+    <dirset dir="${module.springbootbatchcvstodb.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.springbootbatchcvstodb" depends="compile.module.springbootbatchcvstodb.production,compile.module.springbootbatchcvstodb.tests" description="Compile module SpringBootBatchCvsToDb"/>
+  
+  <target name="compile.module.springbootbatchcvstodb.production" depends="register.custom.compilers" description="Compile module SpringBootBatchCvsToDb; production classes">
+    <mkdir dir="${springbootbatchcvstodb.output.dir}"/>
+    <javac2 destdir="${springbootbatchcvstodb.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.springbootbatchcvstodb}/javac">
+      <compilerarg line="${compiler.args.springbootbatchcvstodb}"/>
+      <bootclasspath refid="springbootbatchcvstodb.module.bootclasspath"/>
+      <classpath refid="springbootbatchcvstodb.module.production.classpath"/>
+      <src refid="springbootbatchcvstodb.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.springbootbatchcvstodb"/>
+    </javac2>
+    
+    <copy todir="${springbootbatchcvstodb.output.dir}">
+      <fileset dir="${module.springbootbatchcvstodb.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.springbootbatchcvstodb.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.springbootbatchcvstodb.tests" depends="register.custom.compilers,compile.module.springbootbatchcvstodb.production" description="compile module SpringBootBatchCvsToDb; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.springbootbatchcvstodb" description="cleanup module">
+    <delete dir="${springbootbatchcvstodb.output.dir}"/>
+    <delete dir="${springbootbatchcvstodb.testoutput.dir}"/>
+  </target>
+</project>
