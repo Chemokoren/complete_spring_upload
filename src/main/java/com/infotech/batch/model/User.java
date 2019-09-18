@@ -3,26 +3,18 @@ package com.infotech.batch.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
-@SecondaryTables({
-        @SecondaryTable(name = "role_user",
-                pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id")),
-        @SecondaryTable(name = "BLS_members",
-                pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id")),
-        @SecondaryTable(name = "BLS_categories",
-                pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id")),
-        @SecondaryTable(name = "BLS_user_category",
-                pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id")),
-})
-public class User implements Serializable {
+@Table(name = "user")
+public class User {
 
     private static final long serialVersionUID = -6402068923614583448L;
 
     @Id
-    @Column(name="user_id")
-    private int user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     private String password;
     private String firstName;
@@ -43,59 +35,19 @@ public class User implements Serializable {
     private String marital_status;
     private String occupation;
     private String dialing_code;
-    private String t_one;
-    private String t_two;
-
-    public String getT_one() {
-        return t_one;
-    }
-
-    public void setT_one(String t_one) {
-        this.t_one = t_one;
-    }
-
-    public String getT_two() {
-        return t_two;
-    }
-
-    public void setT_two(String t_two) {
-        this.t_two = t_two;
-    }
 
 
-    @Column(table = "role_user")
-    private String role_id;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private Set<BLSMember> bls_member = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private Set<RoleUser> role_user = new HashSet<>();
 
-    @Column(table = "BLS_members")
-    private Integer principal_id;
-    @Column(table = "BLS_members")
-    private Integer member_id;
-    @Column(table = "BLS_members")
-    private String pin;
-    @Column(table = "BLS_members")
-    private String relation;
-    @Column(table = "BLS_members")
-    private String job_group;
-    @Column(table = "BLS_members")
-    private String country;
-    @Column(table = "BLS_members")
-    private String status;
-
-
-    @Column(table = "BLS_categories")
-    private Integer scheme_id;
-    @Column(table = "BLS_categories")
-    private Integer category_name;
-
-
-    @Column(table = "BLS_user_category")
-    private Integer category_id;
 
     public User() {
     }
 
-    public User(String password, String firstName, String lastName, String middleName, String gender, Date date_of_birth, String photo, String nationality, String national_id, String passport_no, String mobile_phone_number, String home_phone_number, String residential_county, String residential_address, String postal_address, String email, String marital_status, String occupation, String dialing_code, String t_one, String t_two, Integer user_id, String role_id, Integer principal_id, Integer member_id, String pin, String relation, String job_group, String country, String status, Integer scheme_id, Integer category_name, Integer category_id) {
+    public User(String password, String firstName, String lastName, String middleName, String gender, Date date_of_birth, String photo, String nationality, String national_id, String passport_no, String mobile_phone_number, String home_phone_number, String residential_county, String residential_address, String postal_address, String email, String marital_status, String occupation, String dialing_code) {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -115,33 +67,11 @@ public class User implements Serializable {
         this.marital_status = marital_status;
         this.occupation = occupation;
         this.dialing_code = dialing_code;
-        this.t_one = t_one;
-        this.t_two = t_two;
-        this.user_id = user_id;
-        this.role_id = role_id;
-        this.principal_id = principal_id;
-        this.member_id = member_id;
-        this.pin = pin;
-        this.relation = relation;
-        this.job_group = job_group;
-        this.country = country;
-        this.status = status;
-        this.scheme_id = scheme_id;
-        this.category_name = category_name;
-        this.category_id = category_id;
     }
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public Integer getPrincipal_id() {
-        return principal_id;
-    }
-
-    public void setPrincipal_id(Integer principal_id) {
-        this.principal_id = principal_id;
     }
 
     public static long getSerialVersionUID() {
@@ -292,93 +222,6 @@ public class User implements Serializable {
         this.dialing_code = dialing_code;
     }
 
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getRole_id() {
-        return role_id;
-    }
-
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
-    }
-
-    public Integer getMember_id() {
-        return member_id;
-    }
-
-    public void setMember_id(Integer member_id) {
-        this.member_id = member_id;
-    }
-
-    public String getPin() {
-        return pin;
-    }
-
-    public void setPin(String pin) {
-        this.pin = pin;
-    }
-
-    public String getRelation() {
-        return relation;
-    }
-
-    public void setRelation(String relation) {
-        this.relation = relation;
-    }
-
-    public String getJob_group() {
-        return job_group;
-    }
-
-    public void setJob_group(String job_group) {
-        this.job_group = job_group;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Integer getScheme_id() {
-        return scheme_id;
-    }
-
-    public void setScheme_id(Integer scheme_id) {
-        this.scheme_id = scheme_id;
-    }
-
-    public Integer getCategory_name() {
-        return category_name;
-    }
-
-    public void setCategory_name(Integer category_name) {
-        this.category_name = category_name;
-    }
-
-    public Integer getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
-    }
 
     @Override
     public String toString() {
@@ -400,17 +243,6 @@ public class User implements Serializable {
                 ", marital_status='" + marital_status + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", dialing_code='" + dialing_code + '\'' +
-                ", user_id='" + user_id + '\'' +
-                ", role_id='" + role_id + '\'' +
-                ", member_id='" + member_id + '\'' +
-                ", pin='" + pin + '\'' +
-                ", relation='" + relation + '\'' +
-                ", job_group='" + job_group + '\'' +
-                ", country='" + country + '\'' +
-                ", status='" + status + '\'' +
-                ", scheme_id=" + scheme_id +
-                ", category_name=" + category_name +
-                ", category_id=" + category_id +
                 '}';
     }
 
