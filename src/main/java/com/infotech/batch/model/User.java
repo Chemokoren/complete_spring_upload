@@ -212,15 +212,6 @@ public class User {
     public void setDialing_code(String dialing_code) {
         this.dialing_code = dialing_code;
     }
-
-    public Long getUser_id() {
-        return id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.id = user_id;
-    }
-
     @Override
     public String toString() {
         return "User{" +
