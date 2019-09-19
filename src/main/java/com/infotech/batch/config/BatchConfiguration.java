@@ -2,6 +2,7 @@ package com.infotech.batch.config;
 
 import javax.sql.DataSource;
 
+import com.infotech.batch.model.BLSMember;
 import com.infotech.batch.model.User;
 import com.infotech.batch.processor.MembersProcessor;
 import org.springframework.batch.core.Job;
@@ -46,7 +47,9 @@ public class BatchConfiguration {
     @Bean
     public FlatFileItemReader<User> reader() {
         FlatFileItemReader<User> reader = new FlatFileItemReader<User>();
+        FlatFileItemReader<BLSMember> reader1 = new FlatFileItemReader<BLSMember>();
         reader.setResource(new ClassPathResource("persons.csv"));
+        reader1.setResource(new ClassPathResource("persons.csv"));
         reader.setLineMapper(new DefaultLineMapper<User>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setNames(new String[]{"member_id", "principal_id", "firstName", "lastName", "middleName", "gender", "national_id", "pin", "date_of_birth", "relation", "mobile_phone_number", "job_group", "country", "t_one", "t_two"});
@@ -54,6 +57,15 @@ public class BatchConfiguration {
 
             setFieldSetMapper(new BeanWrapperFieldSetMapper<User>() {{
                 setTargetType(User.class);
+            }});
+        }});
+        reader1.setLineMapper(new DefaultLineMapper<BLSMember>() {{
+            setLineTokenizer(new DelimitedLineTokenizer() {{
+                setNames(new String[]{"member_id", "principal_id", "pin", "relation", "mobile_phone_number", "job_group", "country"});
+            }});
+
+            setFieldSetMapper(new BeanWrapperFieldSetMapper<BLSMember>() {{
+                setTargetType(BLSMember.class);
             }});
         }});
         return reader;
