@@ -22,7 +22,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name="user_id")
-    private int user_id;
+    private Long id;
 
     private String password;
     private String firstName;
@@ -95,40 +95,16 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String password, String firstName, String lastName, String middleName, String gender, Date date_of_birth, String photo, String nationality, String national_id, String passport_no, String mobile_phone_number, String home_phone_number, String residential_county, String residential_address, String postal_address, String email, String marital_status, String occupation, String dialing_code, String t_one, String t_two, Integer user_id, String role_id, Integer principal_id, Integer member_id, String pin, String relation, String job_group, String country, String status, Integer scheme_id, Integer category_name, Integer category_id) {
+    public User(String password, String firstName, String lastName, String middleName, String gender, Date date_of_birth, String national_id, String mobile_phone_number) {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.gender = gender;
         this.date_of_birth = date_of_birth;
-        this.photo = photo;
-        this.nationality = nationality;
         this.national_id = national_id;
-        this.passport_no = passport_no;
         this.mobile_phone_number = mobile_phone_number;
-        this.home_phone_number = home_phone_number;
-        this.residential_county = residential_county;
-        this.residential_address = residential_address;
-        this.postal_address = postal_address;
-        this.email = email;
-        this.marital_status = marital_status;
-        this.occupation = occupation;
-        this.dialing_code = dialing_code;
-        this.t_one = t_one;
-        this.t_two = t_two;
-        this.user_id = user_id;
-        this.role_id = role_id;
-        this.principal_id = principal_id;
-        this.member_id = member_id;
-        this.pin = pin;
-        this.relation = relation;
-        this.job_group = job_group;
-        this.country = country;
-        this.status = status;
-        this.scheme_id = scheme_id;
-        this.category_name = category_name;
-        this.category_id = category_id;
+
     }
 
     public User(String firstName, String lastName) {
@@ -292,12 +268,12 @@ public class User implements Serializable {
         this.dialing_code = dialing_code;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Long getUser_id() {
+        return id;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser_id(Long user_id) {
+        this.id = user_id;
     }
 
     public String getRole_id() {
@@ -400,7 +376,7 @@ public class User implements Serializable {
                 ", marital_status='" + marital_status + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", dialing_code='" + dialing_code + '\'' +
-                ", user_id='" + user_id + '\'' +
+                ", user_id='" + id + '\'' +
                 ", role_id='" + role_id + '\'' +
                 ", member_id='" + member_id + '\'' +
                 ", pin='" + pin + '\'' +
