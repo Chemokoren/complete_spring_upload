@@ -19,13 +19,20 @@ import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.support.CompositeItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.ClassPathResource;
 
 import com.infotech.batch.listener.JobCompletionNotificationListener;
 import com.infotech.batch.processor.PersonItemProcessor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 
+import java.sql.*;
 import java.util.Arrays;
 
 @Configuration
@@ -41,13 +48,24 @@ public class BatchConfiguration {
     @Autowired
     public DataSource dataSource;
 
+    public String getFilePath;
+
     @Bean
-    public FlatFileItemReader<User> reader() {
+    @Scope(value = "step", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public FlatFileItemReader<User> reader(@Value("#{jobParameters[fullPathFileName]}") String pathToFile) {
+        getFilePath = pathToFile;
+        if (getFilePath == null) {
+            //read default
+            getFilePath = "uploadingDir/persons.csv";
+        }
+
+
         FlatFileItemReader<User> reader = new FlatFileItemReader<User>();
-        reader.setResource(new ClassPathResource("persons.csv"));
+        reader.setResource(new FileSystemResource(getFilePath));
+//        reader.setResource(new ClassPathResource("persons.csv"));
         reader.setLineMapper(new DefaultLineMapper<User>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
-                setNames(new String[]{"memberID", "principalID","firstName", "lastName", "middleName", "gender", "national_id", "pin", "date_of_birth", "relation", "mobile_phone_number", "job_group", "country","t_one","t_two"});
+                setNames(new String[]{"memberID", "principalID", "firstName", "lastName", "middleName", "gender", "national_id", "pin", "date_of_birth", "relation", "mobile_phone_number", "job_group", "country", "t_one", "t_two"});
             }});
 
             setFieldSetMapper(new BeanWrapperFieldSetMapper<User>() {{
@@ -73,6 +91,7 @@ public class BatchConfiguration {
         jdbcBatchItemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<User>());
         return jdbcBatchItemWriter;
     }
+
 
     @Bean
     @StepScope
@@ -142,12 +161,21 @@ public class BatchConfiguration {
     }
 
     @Bean
+    public TaskExecutor taskExecutor() {
+        SimpleAsyncTaskExecutor asyncTaskExecutor = new SimpleAsyncTaskExecutor("spring_batch");
+        asyncTaskExecutor.setConcurrencyLimit(5);
+        return asyncTaskExecutor;
+    }
+
+    @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
                 .<User, User>chunk(100000)
-                .reader(reader())
-                .processor(processor())
+                .reader(reader(getFilePath))
                 .writer(compositeItemWriter(jdbcUpdateTable1Writer(dataSource), jdbcInsertTable2Writer(dataSource), jdbcUpdateTable3Writer(dataSource), jdbcInsertTable4Writer(dataSource), jdbcInsertTable5Writer(dataSource)))
+                .taskExecutor(taskExecutor())
                 .build();
     }
 }
+
+//   .processor(processor())
